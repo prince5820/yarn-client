@@ -1,0 +1,299 @@
+body {
+  margin: 0 !important;
+  font-family: "Roboto", sans-serif;
+}
+
+.max-width-wrapper {
+  max-width: 500px !important;
+}
+
+.primary-button {
+  width: 100%;
+  padding: 12px 0 !important;
+  border-radius: 12px !important;
+}
+
+.svg-icon {
+  width: 25px !important;
+  height: 25px !important;
+}
+
+.greater-than-icon {
+  width: 16px;
+  height: 16px;
+  color: #8f9098;
+}
+
+.input-label {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  margin-bottom: 4px !important;
+}
+
+.snackbar-success {
+  background-color: green !important;
+}
+
+.snackbar-error {
+  background-color: red !important;
+}
+
+.snackbar-info {
+  background-color: #17a2b8 !important;
+}
+
+.wrapper-sign-in .image-section {
+  background-color: #eaf2ff;
+}
+
+.wrapper-sign-in .login-image {
+  height: 312px;
+  width: 100%;
+}
+
+.wrapper-sign-in .welcome-text {
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.wrapper-sign-up .sign-up-text {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.wrapper-sign-up .create-account-text {
+  font-weight: 400;
+  color: #71727a;
+  font-size: 12px;
+}
+
+.wrapper-profile .username {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.wrapper-profile .user-email {
+  font-size: 12px;
+  font-weight: 400;
+  color: #71727a;
+}
+
+.profile-image {
+  height: 80px;
+  width: 80px;
+  border-radius: 32px;
+  background-color: #eaf2ff;
+}
+
+.wrapper-category .categories-text {
+  font-weight: 900;
+}
+
+.wrapper-category,
+.wrapper-payment,
+.wrapper-contact,
+.wrapper-chat-summary .svg-icon {
+  cursor: pointer;
+}
+
+.wrapper-payment .payment-text {
+  font-weight: 900;
+}
+
+.expense-amount {
+  color: red !important;
+}
+
+.income-amount {
+  color: green !important;
+}
+
+.wrapper-payment-summary .payment-detail-title {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.circular-image {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  background-color: #eaf2ff;
+}
+
+.wrapper-contact .contact-text {
+  font-weight: 900;
+}
+
+.wrapper-chat-summary,
+.padding-wrapper {
+  padding: 40px 0 88px 0 !important;
+}
+
+.wrapper-chat-summary .chat-summary-image {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-color: #eaf2ff;
+}
+
+.wrapper-chat-summary .chat-summary-header-section {
+  position: fixed;
+  display: flex !important;
+  max-width: 500px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 8px 0 16px !important;
+}
+
+.wrapper-chat-summary .send-message-section {
+  position: fixed;
+  bottom: 70px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 500px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px;
+  background-color: white;
+}
+
+.wrapper-chat-summary .send-button {
+  border: 1px solid black !important;
+  padding: 8px !important;
+  border-radius: 12px !important;
+  background-color: #eaf2ff;
+  height: 38px;
+  width: 38px;
+  margin-left: 10px;
+}
+
+.wrapper-chat-summary .message-sent {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.wrapper-chat-summary .message-received {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.wrapper-chat-summary .message {
+  font-size: 14px;
+}
+
+.message-sent .message {
+  background-color: #e1ffc7; /* Light green background for sent messages */
+  padding: 8px 12px;
+  border-radius: 10px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.message-received .message {
+  background-color: #f1f1f1; /* Light gray background for received messages */
+  padding: 8px 12px;
+  border-radius: 10px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.wrapper-chat-summary .message-date-time {
+  font-size: 10px !important;
+}
+
+.wrapper-chat-summary .chat-container {
+  height: calc(100vh - 245px);
+  overflow-y: auto;
+  margin-top: 40px;
+}
+
+.online-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: green;
+  border-radius: 50%;
+  top: 12px;
+  right: 22px;
+  left: 42px;
+}
+
+.transaction-container {
+  height: calc(100vh - 160px); /* Adjust height for your layout */
+  overflow-y: auto; /* Enable scrolling when content overflows */
+  margin-top: 40px; /* Top margin */
+  display: flex; /* Flex layout */
+  flex-direction: column; /* Stack items vertically */
+  flex-grow: 1;
+}
+
+.transaction-box {
+  background-color: #f5f5f5;
+  padding: 20px; /* Larger padding for bigger box */
+  border-radius: 15px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+  max-width: 70%; /* Limits the width to make it appear box-like */
+  margin-bottom: 30px;
+}
+
+.wrapper-chat-summary {
+  height: 100vh;
+}
+
+.sent {
+  margin-left: auto !important; /* Align sent transactions to the right */
+}
+
+.received {
+  margin-right: auto !important; /* Align received transactions to the left */
+}
+
+.transaction-details {
+  display: flex;
+  flex-direction: column; /* Stack amount and date vertically */
+}
+
+.transaction-amount {
+  font-weight: bold !important;
+  font-size: 2rem; /* Larger font for the amount */
+  color: #000000; /* Same color for all transactions */
+}
+
+.transaction-date {
+  font-size: 0.9rem;
+  color: #757575;
+  margin-top: 5px; /* Space between amount and date */
+}
+
+.transaction-title {
+  font-size: 14px;
+  font-weight: bold !important;
+}
+
+.file-preview {
+  margin-top: 5px;
+}
+
+.file-preview img {
+  display: block;
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.file-details {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-top: 5px;
+}
+
+.file-details p {
+  margin: 0;
+  font-size: 12px;
+}
+
+.audio-preview audio {
+  display: block;
+  margin-top: 5px;
+}

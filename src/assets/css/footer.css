@@ -1,0 +1,23 @@
+.wrapper-footer {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  right: 0;
+  max-width: 500px;
+  width: 100%;
+  z-index: 1;
+}
+
+.footer-menu-section {
+  height: 88px !important;
+  justify-content: space-between !important;
+}
+
+.min-width-60 {
+  min-width: 60px !important;
+}
+
+.active-menu {
+  filter: invert(33%) sepia(43%) saturate(4044%) hue-rotate(196deg) brightness(91%) contrast(81%) !important;
+}

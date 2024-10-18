@@ -1,0 +1,12 @@
+.MuiOutlinedInput-root {
+  border-radius: 12px !important;
+}
+
+.MuiFormControl-root {
+  margin-bottom: 16px !important;
+}
+
+.MuiFormHelperText-root {
+  margin-bottom: 16px !important;
+  margin-left: 0 !important;
+}
