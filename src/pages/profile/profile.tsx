@@ -5,14 +5,15 @@ import dayjs, { Dayjs } from "dayjs";
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 import { useEffect, useState } from "react";
+import QRCode from "react-qr-code";
+import { useNavigate } from "react-router-dom";
+import LoginImage from '../../assets/image/login.svg?react';
 import { CHECK_REGEX_EMAIL, CHECK_REGEX_MOBILE, PATH_TO_CHAT } from "../../common/constants";
 import { MESSAGE_USER_UPDATE_SUCCESS, SNACKBAR_ERROR, SNACKBAR_SUCCESS } from "../../common/message";
 import { useAppDispatch } from "../../store";
+import { User } from "../../store/auth/types";
 import { getUserById, updateUser } from "../../store/profile/thunk";
 import { setMessage } from "../../store/snackbar/reducer";
-import { useNavigate } from "react-router-dom";
-import { User } from "../../store/auth/types";
-import QRCode from "react-qr-code";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -141,7 +142,11 @@ const Profile = () => {
     <Container className="wrapper-profile padding-wrapper-for-non-auth max-width-wrapper">
       <Typography variant="h6" className="text-center mb-16">Profile</Typography>
       <Container className="text-center mb-16">
-        <img className="profile-image" src={userByIdResponse?.profileUrl || '/src/assets/image/login.png'} alt="Profile image" />
+        {
+          userByIdResponse?.profileUrl ?
+            <img className="profile-image" src={userByIdResponse?.profileUrl} alt="Profile image" /> :
+            <LoginImage className="profile-image" />
+        }
       </Container>
       <Typography className="text-center username">{userByIdResponse?.firstName} {userByIdResponse?.lastName}</Typography>
       <Typography className="text-center mb-16 user-email">{userByIdResponse?.email}</Typography>

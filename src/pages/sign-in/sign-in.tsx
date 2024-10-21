@@ -8,6 +8,7 @@ import { MESSAGE_SIGN_IN_EMAIL_PASSWORD_NOT_MATCH, MESSAGE_SIGN_IN_SUCCESS, SNAC
 import { useAppDispatch } from "../../store";
 import { signIn } from "../../store/auth/thunk";
 import { setMessage } from "../../store/snackbar/reducer";
+import LoginImage from '../../assets/image/login.svg?react';
 
 const SignIn = () => {
   const [email, setEmail] = useState<string>('');
@@ -57,7 +58,7 @@ const SignIn = () => {
   return (
     <Container className="wrapper-sign-in padding-none">
       <Container className="image-section max-width-wrapper">
-        <img className="login-image" src="/src/assets/image/login.png" alt="login image" />
+        <LoginImage className="login-image" />
       </Container>
       <Container className="padding-wrapper-for-auth max-width-wrapper">
         <Grid container spacing={1}>

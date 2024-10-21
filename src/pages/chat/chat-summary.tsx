@@ -10,6 +10,7 @@ import DownloadIcon from '../../assets/icon/common/download.svg?react';
 import EmojiSmile from '../../assets/icon/common/emoji-smile.svg?react';
 import MenuVertical from '../../assets/icon/common/menu-vertical.svg?react';
 import SendIcon from '../../assets/icon/common/send.svg?react';
+import LoginImage from '../../assets/image/login.svg?react';
 import RenderMessage from "../../common/components/render-message/render-message";
 import { PATH_TO_CHAT, PATH_TO_CHAT_HISTORY, PATH_TO_CHAT_TRANSACTION, PATH_TO_ROOT_ROUTE } from "../../common/constants";
 import { MESSAGE_MAX_FILE_SIZE_2MB, SNACKBAR_ERROR } from "../../common/message";
@@ -360,7 +361,11 @@ const ChatSummary = () => {
             <BackIcon className="svg-icon" onClick={() => navigate(PATH_TO_CHAT)} />
           </Grid>
           <Grid item xs={1}>
-            <img src={user.profileUrl || "/src/assets/image/login.png"} className="chat-summary-image" alt="chat-summary-image" />
+            {
+              user.profileUrl ?
+                <img src={user.profileUrl} className="chat-summary-image" alt="chat-summary-image" /> :
+                <LoginImage className="chat-summary-image" />
+            }
           </Grid>
           <Grid item xs={9}>
             <Typography variant="body2">{user.firstName} {user.lastName}</Typography>

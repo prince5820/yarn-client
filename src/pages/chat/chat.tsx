@@ -1,6 +1,7 @@
 import { Badge, Container, Divider, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LoginImage from '../../assets/image/login.svg?react';
 import { PATH_TO_CHAT_SUMMARY } from "../../common/constants";
 import { SNACKBAR_ERROR } from "../../common/message";
 import { useAppDispatch } from "../../store";
@@ -106,7 +107,11 @@ const Chat = () => {
         userList && userList.map((user) => (
           <Grid container spacing={1} className="mb-4 mt-4 d-flex align-item-center" sx={{ cursor: 'pointer' }} key={user.id} onClick={() => goToChatSummary(user)}>
             <Grid item xs={2} sx={{ position: 'relative' }}>
-              <img src={user.profileUrl || "/src/assets/image/login.png"} className="circular-image" alt="chat-image" />
+              {
+                user.profileUrl ?
+                  <img src={user.profileUrl} className="circular-image" alt="chat-image" /> :
+                  <LoginImage className="circular-image" />
+              }
               {user.id && isOnline(user.id.toString()) && (
                 <span className="online-dot"></span>
               )}

@@ -2,6 +2,7 @@ import { Container, Divider, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Plus from '../../assets/icon/common/plus.svg?react';
+import LoginImage from '../../assets/image/login.svg?react';
 import { PATH_TO_ADD_CONTACT, PATH_TO_CONTACT_SUMMARY } from "../../common/constants";
 import { SNACKBAR_ERROR } from "../../common/message";
 import { useAppDispatch } from "../../store";
@@ -54,7 +55,11 @@ const Contact = () => {
         contactList.map((contact) => (
           <Grid container spacing={1} className="mb-4 mt-4" key={contact.id} sx={{ cursor: 'pointer' }} onClick={() => goToContactSummary(contact)}>
             <Grid item xs={2}>
-              <img src={contact.profileUrl || "/src/assets/image/login.png"} className="circular-image" alt="contact-image" />
+              {
+                contact.profileUrl ?
+                  <img src={contact.profileUrl} className="circular-image" alt="contact-image" /> :
+                  <LoginImage className='circular-image' />
+              }
             </Grid>
             <Grid item xs={10}>
               <Typography variant="body2">{contact.firstName} {contact.lastName}</Typography>

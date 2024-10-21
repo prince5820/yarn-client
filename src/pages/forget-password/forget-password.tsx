@@ -1,11 +1,12 @@
 import { Button, Container, Grid, TextField, Typography } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import { PATH_TO_CHAT, PATH_TO_SIGN_IN } from "../../common/constants";
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import LoginImage from '../../assets/image/login.svg?react';
+import { PATH_TO_CHAT, PATH_TO_SIGN_IN } from "../../common/constants";
+import { SNACKBAR_ERROR, SNACKBAR_SUCCESS } from "../../common/message";
 import { useAppDispatch } from "../../store";
 import { forgetPassword } from "../../store/auth/thunk";
 import { setMessage } from "../../store/snackbar/reducer";
-import { SNACKBAR_ERROR, SNACKBAR_SUCCESS } from "../../common/message";
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState<string>('');
@@ -44,7 +45,7 @@ const ForgetPassword = () => {
   return (
     <Container className="wrapper-sign-in padding-none">
       <Container className="image-section max-width-wrapper">
-        <img className="login-image" src="/src/assets/image/login.png" alt="login image" />
+        <LoginImage className="login-image" />
       </Container>
       <Container className="padding-wrapper-for-auth max-width-wrapper">
         <Grid container spacing={1}>

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import BackIcon from '../../assets/icon/common/back.svg?react';
 import Rupee from '../../assets/icon/common/rupee.svg?react';
+import LoginImage from '../../assets/image/login.svg?react';
 import { EXPENSE_AMOUNT, INCOME_AMOUNT, PATH_TO_CHAT_SUMMARY, PATH_TO_ROOT_ROUTE, PATH_TO_TRANSACTION_SUMMARY } from "../../common/constants";
 import { SNACKBAR_ERROR } from "../../common/message";
 import { useAppDispatch } from "../../store";
@@ -64,7 +65,11 @@ const ChatTransaction = () => {
             <BackIcon className="svg-icon" onClick={() => navigate(PATH_TO_CHAT_SUMMARY, { state: { user: user } })} />
           </Grid>
           <Grid item xs={1}>
-            <img src={user.profileUrl || "/src/assets/image/login.png"} className="chat-summary-image" alt="chat-summary-image" />
+            {
+              user.profileUrl ?
+                <img src={user.profileUrl} className="chat-summary-image" alt="chat-summary-image" /> :
+                <LoginImage className="chat-summary-image" />
+            }
           </Grid>
           <Grid item xs={9}>
             <Typography variant="body2">{user.firstName} {user.lastName}</Typography>
