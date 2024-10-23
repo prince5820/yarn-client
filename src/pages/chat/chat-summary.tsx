@@ -109,25 +109,25 @@ const ChatSummary = () => {
 
   const handleSendMessage = async () => {
     const trimmedMessage = textMsg.trim();
-    let fileData = null;
+    // let fileData = null;
 
     if (file && file.size / 1024 / 1024 <= 2) {
       setIsLoading(true);
-      const reader = new FileReader();
-      reader.onloadend = () => {
+      // const reader = new FileReader();
+      // reader.onloadend = () => {
 
-        const base64String = reader.result as string;
+      //   const base64String = reader.result as string;
 
-        fileData = {
-          fileName: file.name,
-          fileType: file.type,
-          fileData: base64String.split(',')[1],
-        };
+      //   fileData = {
+      //     fileName: file.name,
+      //     fileType: file.type,
+      //     fileData: base64String.split(',')[1],
+      //   };
 
-        sendMessage(null, fileData);
-        setIsLoading(false);
-      };
-      reader.readAsDataURL(file);
+
+      //   setIsLoading(false);
+      // };
+      sendMessage(null, file);
     } else {
       if (trimmedMessage.length > 0) {
         sendMessage(trimmedMessage, null);
