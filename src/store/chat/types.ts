@@ -20,13 +20,6 @@ export interface Message {
   fileData?: any
 }
 
-export interface RequestPayload {
-  messageText: string | null
-  senderId: number
-  receiverId: number
-  file: File | null
-}
-
 export enum IsRead {
   true = 1,
   false = 0

@@ -3,7 +3,7 @@ import { AppDispatch } from "..";
 import { API_PATH_GET_INITIAL_MESSAGES, API_PATH_GET_PDF_DOC, API_PATH_GET_TRANSACTION, API_PATH_GET_UNREAD_MESSAGES, API_PATH_GET_USERS_LIST, API_PATH_SEND_MESSAGES, API_PATH_SENT_PDF_MAIL } from "../../common/api";
 import { axiosInstance } from "../../utils/axios-config";
 import { getPdfFailure, getTransactionFailure, getUserListFailure, getUserListSuccess, sentMailPdfFailure, sentMailPdfSuccess } from "./reducer";
-import { PdfRequestPayload, RequestPayload, TransactionRequestPayload } from "./types";
+import { PdfRequestPayload, TransactionRequestPayload } from "./types";
 
 export const getUsersList = () => async (dispatch: AppDispatch) => {
   try {
@@ -94,9 +94,13 @@ export const getUnreadMessages = (receiverId: number) => async () => {
   }
 }
 
-export const sendMessageToUser = (requestPayload: RequestPayload) => async () => {
+export const sendMessageToUser = (formData: FormData) => async () => {
   try {
-    const response = await axiosInstance.post(API_PATH_SEND_MESSAGES, requestPayload);
+    const response = await axiosInstance.post(API_PATH_SEND_MESSAGES, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     return response.data;
   } catch (err) {
     if (err instanceof AxiosError) {

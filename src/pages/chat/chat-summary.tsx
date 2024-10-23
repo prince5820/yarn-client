@@ -139,15 +139,20 @@ const ChatSummary = () => {
   const sendMessage = async (messageText: string | null, file: File | null) => {
     if (((messageText && messageText.length > 0) || file) && user && userId) {
       if (user && userId) {
-        const newMessage = {
-          messageText: messageText || null,
-          senderId: parseInt(userId),
-          receiverId: user.id,
-          file: file || null,
-        };
+        const formData = new FormData();
+        formData.append('senderId', userId);
+        formData.append('receiverId', user.id.toString());
+
+        if (messageText) {
+          formData.append('messageText', messageText);
+        }
+
+        if (file) {
+          formData.append('file', file); // Attach the file here
+        }
 
         try {
-          const response = await dispatch(sendMessageToUser(newMessage));
+          const response = await dispatch(sendMessageToUser(formData));
           if (response) {
             socket.emit('sendMessage', response);
             setTextMsg('');
