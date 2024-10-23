@@ -136,7 +136,7 @@ const ChatSummary = () => {
     }
   };
 
-  const sendMessage = async (messageText: string | null, file: any) => {
+  const sendMessage = async (messageText: string | null, file: File | null) => {
     if (((messageText && messageText.length > 0) || file) && user && userId) {
       if (user && userId) {
         const newMessage = {
