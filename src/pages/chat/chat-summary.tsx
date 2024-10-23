@@ -127,6 +127,7 @@ const ChatSummary = () => {
 
       //   setIsLoading(false);
       // };
+      console.log(file);
       sendMessage(null, file);
     } else {
       if (trimmedMessage.length > 0) {
