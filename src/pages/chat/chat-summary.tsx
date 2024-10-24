@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import AttachmentIcon from '../../assets/icon/common/attachment.svg?react';
 import BackIcon from '../../assets/icon/common/back.svg?react';
 import CloseIcon from '../../assets/icon/common/close.svg?react';
-import DownloadIcon from '../../assets/icon/common/download.svg?react';
+// import DownloadIcon from '../../assets/icon/common/download.svg?react';
 import EmojiSmile from '../../assets/icon/common/emoji-smile.svg?react';
 import MenuVertical from '../../assets/icon/common/menu-vertical.svg?react';
 import SendIcon from '../../assets/icon/common/send.svg?react';
@@ -226,8 +226,6 @@ const ChatSummary = () => {
     if (fileName && fileType) {
       const extension = fileName.split('.').pop()?.toLowerCase(); // Normalize extension
 
-      const filePath = `https://yarn-server-7h5y.onrender.com/uploads`;
-
       // Render preview based on the file type
       switch (extension) {
         case 'jpg':
@@ -240,10 +238,10 @@ const ChatSummary = () => {
           // Render image preview
           return (
             <div className="file-preview image-preview">
-              <img src={`${filePath}/${fileName}`} alt="image preview" style={{ width: '200px', borderRadius: '10px' }} />
+              <img src={fileName} alt="image preview" style={{ width: '200px', borderRadius: '10px' }} />
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
+                {/* <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} /> */}
               </div>
             </div>
           );
@@ -254,10 +252,10 @@ const ChatSummary = () => {
           // Render audio preview
           return (
             <div className="file-preview audio-preview">
-              <audio controls src={`${filePath}/${fileName}`} style={{ width: '210px' }} />
+              <audio controls src={fileName} style={{ width: '210px' }} />
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
+                {/* <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} /> */}
               </div>
             </div>
           );
@@ -269,10 +267,10 @@ const ChatSummary = () => {
           // Render video preview
           return (
             <div className="file-preview video-preview">
-              <video controls src={`${filePath}/${fileName}`} style={{ width: '210px' }} />
+              <video controls src={fileName} style={{ width: '210px' }} />
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
+                {/* <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} /> */}
               </div>
             </div>
           );
@@ -289,7 +287,7 @@ const ChatSummary = () => {
               </div>
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
+                {/* <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} /> */}
               </div>
             </div>
           );
@@ -306,7 +304,7 @@ const ChatSummary = () => {
               </div>
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
+                {/* <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} /> */}
               </div>
             </div>
           );
@@ -315,14 +313,14 @@ const ChatSummary = () => {
     return null;
   };
 
-  const handleDownloadFile = (filePath: string, fileName: string) => {
-    const element = document.createElement('a');
-    element.setAttribute('href', filePath);
-    element.setAttribute('download', fileName);
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
-  };
+  // const handleDownloadFile = (filePath: string, fileName: string) => {
+  //   const element = document.createElement('a');
+  //   element.setAttribute('href', filePath);
+  //   element.setAttribute('download', fileName);
+  //   document.body.appendChild(element);
+  //   element.click();
+  //   document.body.removeChild(element);
+  // };
 
   return (
     user ? (
