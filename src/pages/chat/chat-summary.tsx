@@ -1,6 +1,6 @@
 import data from '@emoji-mart/data';
 import Picker from "@emoji-mart/react";
-import { CircularProgress, Container, Grid, Menu, MenuItem, TextField, Typography } from "@mui/material";
+import { Container, Grid, Menu, MenuItem, TextField, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AttachmentIcon from '../../assets/icon/common/attachment.svg?react';
@@ -31,7 +31,6 @@ const ChatSummary = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
@@ -109,25 +108,8 @@ const ChatSummary = () => {
 
   const handleSendMessage = async () => {
     const trimmedMessage = textMsg.trim();
-    // let fileData = null;
 
     if (file && file.size / 1024 / 1024 <= 2) {
-      setIsLoading(true);
-      // const reader = new FileReader();
-      // reader.onloadend = () => {
-
-      //   const base64String = reader.result as string;
-
-      //   fileData = {
-      //     fileName: file.name,
-      //     fileType: file.type,
-      //     fileData: base64String.split(',')[1],
-      //   };
-
-
-      //   setIsLoading(false);
-      // };
-      console.log(file);
       sendMessage(null, file);
     } else {
       if (trimmedMessage.length > 0) {
@@ -239,12 +221,13 @@ const ChatSummary = () => {
   };
 
   const renderFilePreview = (message: Message) => {
-    const { fileName, filePath, fileType, fileData } = message;
+    const { fileName, fileType, messageDateTime } = message;
 
-    if (!filePath) return null;
+    if (fileName && fileType) {
+      const extension = fileName.split('.').pop()?.toLowerCase(); // Normalize extension
 
-    if (fileName && fileType && fileData && filePath) {
-      const extension = fileName.split('.').pop();
+      // Construct file URL based on server path (assuming backend serves files from /uploads)
+      const fileUrl = `/uploads/${fileName}`;
 
       // Render preview based on the file type
       switch (extension) {
@@ -252,20 +235,15 @@ const ChatSummary = () => {
         case 'jpeg':
         case 'png':
         case 'svg':
-        case 'svg+xml':
         case 'webp':
         case 'gif':
           // Render image preview
           return (
             <div className="file-preview image-preview">
-              <img src={`data:${message.fileType};base64,${message.fileData}`} alt="image preview" style={{ width: '200px', borderRadius: '10px' }} />
+              <img src={fileUrl} alt="image preview" style={{ width: '200px', borderRadius: '10px' }} />
               <div className="file-details">
-                <p>{message.messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => {
-                  if (fileData) {
-                    handleDownloadFile(fileType, fileData, fileName)
-                  }
-                }} />
+                <p>{messageDateTime}</p>
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(fileUrl, fileName)} />
               </div>
             </div>
           );
@@ -276,14 +254,10 @@ const ChatSummary = () => {
           // Render audio preview
           return (
             <div className="file-preview audio-preview">
-              <audio controls src={`data:${message.fileType};base64,${message.fileData}`} style={{ width: '210px' }} />
+              <audio controls src={fileUrl} style={{ width: '210px' }} />
               <div className="file-details">
-                <p>{message.messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => {
-                  if (fileData) {
-                    handleDownloadFile(fileType, fileData, fileName)
-                  }
-                }} />
+                <p>{messageDateTime}</p>
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(fileUrl, fileName)} />
               </div>
             </div>
           );
@@ -295,10 +269,10 @@ const ChatSummary = () => {
           // Render video preview
           return (
             <div className="file-preview video-preview">
-              <video controls src={`data:${fileType};base64,${fileData}`} style={{ width: '210px' }} />
+              <video controls src={fileUrl} style={{ width: '210px' }} />
               <div className="file-details">
-                <p>{message.messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(fileType, fileData, fileName)} />
+                <p>{messageDateTime}</p>
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(fileUrl, fileName)} />
               </div>
             </div>
           );
@@ -308,18 +282,14 @@ const ChatSummary = () => {
           return (
             <div className="file-preview">
               <div
-                style={{ width: '200px', height: '250px', border: '1px solid #ccc', background: '#ffffff', fontSize: '40px' }}
+                style={{ width: '200px', height: '250px', border: '1px solid #ccc', background: '#fff' }}
                 className="d-flex align-item-center justify-content-center"
               >
-                {extension}
+                {extension.toUpperCase()}
               </div>
               <div className="file-details">
-                <p>{message.messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => {
-                  if (fileData) {
-                    handleDownloadFile(fileType, fileData, fileName)
-                  }
-                }} />
+                <p>{messageDateTime}</p>
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(fileUrl, fileName)} />
               </div>
             </div>
           );
@@ -329,34 +299,29 @@ const ChatSummary = () => {
           return (
             <div className="file-preview">
               <div
-                style={{ width: '200px', height: '250px', border: '1px solid #ccc', background: '#ffffff', fontSize: '40px' }}
+                style={{ width: '200px', height: '250px', border: '1px solid #ccc', background: '#fff' }}
                 className="d-flex align-item-center justify-content-center"
               >
-                {extension}
+                {extension?.toUpperCase() || 'FILE'}
               </div>
               <div className="file-details">
-                <p>{message.messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => {
-                  if (fileData) {
-                    handleDownloadFile(fileType, fileData, fileName)
-                  }
-                }} />
+                <p>{messageDateTime}</p>
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(fileUrl, fileName)} />
               </div>
             </div>
           );
       }
     }
+    return null;
   };
 
-  const handleDownloadFile = (fileType: string, fileData: string | null, fileName: string) => {
-    if (fileData) {
-      const element = document.createElement('a');
-      element.setAttribute('href', `data:${fileType};base64,${fileData}`);
-      element.setAttribute('download', fileName);
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
-    }
+  const handleDownloadFile = (fileUrl: string, fileName: string) => {
+    const element = document.createElement('a');
+    element.setAttribute('href', fileUrl);
+    element.setAttribute('download', fileName);
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   };
 
   return (
@@ -472,15 +437,11 @@ const ChatSummary = () => {
                     >
                       {file.name}
                     </span>
-                    {isLoading ? (
-                      <CircularProgress size={24} />
-                    ) : (
-                      <CloseIcon
-                        className="svg-icon"
-                        style={{ cursor: 'pointer', flexShrink: 0 }}
-                        onClick={handleRemoveFile} // Remove the file onClick
-                      />
-                    )}
+                    <CloseIcon
+                      className="svg-icon"
+                      style={{ cursor: 'pointer', flexShrink: 0 }}
+                      onClick={handleRemoveFile} // Remove the file onClick
+                    />
                   </div>
                 ),
               }}
