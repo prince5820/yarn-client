@@ -221,10 +221,12 @@ const ChatSummary = () => {
   };
 
   const renderFilePreview = (message: Message) => {
-    const { fileName, fileType, messageDateTime, filePath } = message;
+    const { fileName, fileType, messageDateTime } = message;
 
-    if (fileName && fileType && filePath) {
+    if (fileName && fileType) {
       const extension = fileName.split('.').pop()?.toLowerCase(); // Normalize extension
+
+      const filePath = `/uploads/${fileName}`;
 
       // Render preview based on the file type
       switch (extension) {
