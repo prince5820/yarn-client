@@ -221,13 +221,10 @@ const ChatSummary = () => {
   };
 
   const renderFilePreview = (message: Message) => {
-    const { fileName, fileType, messageDateTime } = message;
+    const { fileName, fileType, messageDateTime, filePath } = message;
 
-    if (fileName && fileType) {
+    if (fileName && fileType && filePath) {
       const extension = fileName.split('.').pop()?.toLowerCase(); // Normalize extension
-
-      // Construct file URL based on server path (assuming backend serves files from /uploads)
-      const fileUrl = `/uploads/${fileName}`;
 
       // Render preview based on the file type
       switch (extension) {
@@ -240,10 +237,10 @@ const ChatSummary = () => {
           // Render image preview
           return (
             <div className="file-preview image-preview">
-              <img src={fileUrl} alt="image preview" style={{ width: '200px', borderRadius: '10px' }} />
+              <img src={filePath} alt="image preview" style={{ width: '200px', borderRadius: '10px' }} />
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(fileUrl, fileName)} />
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
               </div>
             </div>
           );
@@ -254,10 +251,10 @@ const ChatSummary = () => {
           // Render audio preview
           return (
             <div className="file-preview audio-preview">
-              <audio controls src={fileUrl} style={{ width: '210px' }} />
+              <audio controls src={filePath} style={{ width: '210px' }} />
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(fileUrl, fileName)} />
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
               </div>
             </div>
           );
@@ -269,10 +266,10 @@ const ChatSummary = () => {
           // Render video preview
           return (
             <div className="file-preview video-preview">
-              <video controls src={fileUrl} style={{ width: '210px' }} />
+              <video controls src={filePath} style={{ width: '210px' }} />
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(fileUrl, fileName)} />
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
               </div>
             </div>
           );
@@ -289,7 +286,7 @@ const ChatSummary = () => {
               </div>
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(fileUrl, fileName)} />
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
               </div>
             </div>
           );
@@ -306,7 +303,7 @@ const ChatSummary = () => {
               </div>
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(fileUrl, fileName)} />
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
               </div>
             </div>
           );
@@ -315,9 +312,9 @@ const ChatSummary = () => {
     return null;
   };
 
-  const handleDownloadFile = (fileUrl: string, fileName: string) => {
+  const handleDownloadFile = (filePath: string, fileName: string) => {
     const element = document.createElement('a');
-    element.setAttribute('href', fileUrl);
+    element.setAttribute('href', filePath);
     element.setAttribute('download', fileName);
     document.body.appendChild(element);
     element.click();
