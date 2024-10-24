@@ -226,7 +226,7 @@ const ChatSummary = () => {
     if (fileName && fileType) {
       const extension = fileName.split('.').pop()?.toLowerCase(); // Normalize extension
 
-      const filePath = `/uploads/${fileName}`;
+      const filePath = `https://yarn-server-7h5y.onrender.com/uploads/${fileName}`;
 
       // Render preview based on the file type
       switch (extension) {
