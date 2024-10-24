@@ -226,6 +226,8 @@ const ChatSummary = () => {
     if (fileName && fileType) {
       const extension = fileName.split('.').pop()?.toLowerCase(); // Normalize extension
 
+      const fileUrl = `https://yarn-server-7h5y.onrender.com/${fileName}`;
+
       // Render preview based on the file type
       switch (extension) {
         case 'jpg':
@@ -238,7 +240,7 @@ const ChatSummary = () => {
           // Render image preview
           return (
             <div className="file-preview image-preview">
-              <img src={fileName} alt="image preview" style={{ width: '200px', borderRadius: '10px' }} />
+              <img src={fileUrl} alt="image preview" style={{ width: '200px', borderRadius: '10px' }} />
               <div className="file-details">
                 <p>{messageDateTime}</p>
                 {/* <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} /> */}
@@ -252,7 +254,7 @@ const ChatSummary = () => {
           // Render audio preview
           return (
             <div className="file-preview audio-preview">
-              <audio controls src={fileName} style={{ width: '210px' }} />
+              <audio controls src={fileUrl} style={{ width: '210px' }} />
               <div className="file-details">
                 <p>{messageDateTime}</p>
                 {/* <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} /> */}
@@ -267,7 +269,7 @@ const ChatSummary = () => {
           // Render video preview
           return (
             <div className="file-preview video-preview">
-              <video controls src={fileName} style={{ width: '210px' }} />
+              <video controls src={fileUrl} style={{ width: '210px' }} />
               <div className="file-details">
                 <p>{messageDateTime}</p>
                 {/* <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} /> */}
