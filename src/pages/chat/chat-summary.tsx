@@ -234,6 +234,7 @@ const ChatSummary = () => {
         case 'jpeg':
         case 'png':
         case 'svg':
+        case 'svg+xml':
         case 'webp':
         case 'gif':
           // Render image preview
