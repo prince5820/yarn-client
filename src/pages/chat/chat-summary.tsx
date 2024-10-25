@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import AttachmentIcon from '../../assets/icon/common/attachment.svg?react';
 import BackIcon from '../../assets/icon/common/back.svg?react';
 import CloseIcon from '../../assets/icon/common/close.svg?react';
-// import DownloadIcon from '../../assets/icon/common/download.svg?react';
+import DownloadIcon from '../../assets/icon/common/download.svg?react';
 import EmojiSmile from '../../assets/icon/common/emoji-smile.svg?react';
 import MenuVertical from '../../assets/icon/common/menu-vertical.svg?react';
 import SendIcon from '../../assets/icon/common/send.svg?react';
@@ -241,7 +241,7 @@ const ChatSummary = () => {
               <img src={filePath} alt="image preview" style={{ width: '200px', borderRadius: '10px' }} />
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                {/* <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} /> */}
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
               </div>
             </div>
           );
@@ -255,7 +255,7 @@ const ChatSummary = () => {
               <audio controls src={filePath} style={{ width: '210px' }} />
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                {/* <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} /> */}
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
               </div>
             </div>
           );
@@ -270,7 +270,7 @@ const ChatSummary = () => {
               <video controls src={filePath} style={{ width: '210px' }} />
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                {/* <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} /> */}
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
               </div>
             </div>
           );
@@ -287,7 +287,7 @@ const ChatSummary = () => {
               </div>
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                {/* <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} /> */}
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
               </div>
             </div>
           );
@@ -304,7 +304,7 @@ const ChatSummary = () => {
               </div>
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                {/* <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} /> */}
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
               </div>
             </div>
           );
@@ -313,14 +313,14 @@ const ChatSummary = () => {
     return null;
   };
 
-  // const handleDownloadFile = (filePath: string, fileName: string) => {
-  //   const element = document.createElement('a');
-  //   element.setAttribute('href', filePath);
-  //   element.setAttribute('download', fileName);
-  //   document.body.appendChild(element);
-  //   element.click();
-  //   document.body.removeChild(element);
-  // };
+  const handleDownloadFile = (filePath: string, fileName: string) => {
+    const element = document.createElement('a');
+    element.setAttribute('href', filePath);
+    element.setAttribute('download', fileName);
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  };
 
   return (
     user ? (
