@@ -287,7 +287,7 @@ const ChatSummary = () => {
               </div>
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                <a href={filePath} download>download</a>
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
               </div>
             </div>
           );
