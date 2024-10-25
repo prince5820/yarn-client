@@ -15,7 +15,7 @@ import RenderMessage from "../../common/components/render-message/render-message
 import { PATH_TO_CHAT, PATH_TO_CHAT_HISTORY, PATH_TO_CHAT_TRANSACTION, PATH_TO_ROOT_ROUTE } from "../../common/constants";
 import { MESSAGE_MAX_FILE_SIZE_2MB, SNACKBAR_ERROR } from "../../common/message";
 import { useAppDispatch } from "../../store";
-import { loadInitialMessages, sendMessageToUser } from "../../store/chat/thunk";
+import { loadInitialMessages } from "../../store/chat/thunk";
 import { Message } from "../../store/chat/types";
 import { setMessage } from "../../store/snackbar/reducer";
 import socket from '../../utils/web-socket-client';
@@ -133,17 +133,18 @@ const ChatSummary = () => {
           formData.append('file', file); // Attach the file here
         }
 
-        try {
-          const response = await dispatch(sendMessageToUser(formData));
-          if (response) {
-            socket.emit('sendMessage', response);
-            setTextMsg('');
-            setFile(null);
-            setShowEmojiPicker(false);
-          }
-        } catch (err) {
-          dispatch(setMessage({ msg: err, className: SNACKBAR_ERROR }));
-        }
+        console.log(formData);
+        // try {
+        //   const response = await dispatch(sendMessageToUser(formData));
+        //   if (response) {
+        //     socket.emit('sendMessage', response);
+        //     setTextMsg('');
+        //     setFile(null);
+        //     setShowEmojiPicker(false);
+        //   }
+        // } catch (err) {
+        //   dispatch(setMessage({ msg: err, className: SNACKBAR_ERROR }));
+        // }
       }
     }
   };
