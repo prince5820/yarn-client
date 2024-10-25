@@ -315,8 +315,8 @@ const ChatSummary = () => {
 
   const handleDownloadFile = (filePath: string, fileName: string) => {
     const element = document.createElement('a');
-    element.setAttribute('href', filePath);
-    element.setAttribute('download', fileName);
+    element.href = filePath;
+    element.download = fileName;
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
