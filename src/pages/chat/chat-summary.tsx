@@ -110,6 +110,7 @@ const ChatSummary = () => {
     const trimmedMessage = textMsg.trim();
 
     if (file && file.size / 1024 / 1024 <= 2) {
+      console.log('aaa file in handlesendmessage ===>', file);
       sendMessage(null, file);
     } else {
       if (trimmedMessage.length > 0) {
@@ -134,6 +135,7 @@ const ChatSummary = () => {
         }
 
         console.log(formData);
+        console.log('aaa file in sendmessage ===>', file);
         // try {
         //   const response = await dispatch(sendMessageToUser(formData));
         //   if (response) {
