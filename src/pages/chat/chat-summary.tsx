@@ -12,7 +12,7 @@ import MenuVertical from '../../assets/icon/common/menu-vertical.svg?react';
 import SendIcon from '../../assets/icon/common/send.svg?react';
 import LoginImage from '../../assets/image/login.svg?react';
 import RenderMessage from "../../common/components/render-message/render-message";
-import { PATH_TO_CHAT, PATH_TO_CHAT_HISTORY, PATH_TO_CHAT_TRANSACTION, PATH_TO_ROOT_ROUTE } from "../../common/constants";
+import { PATH_TO_CHAT, PATH_TO_CHAT_HISTORY, PATH_TO_CHAT_SUMMARY, PATH_TO_CHAT_TRANSACTION, PATH_TO_ROOT_ROUTE } from "../../common/constants";
 import { MESSAGE_MAX_FILE_SIZE_2MB, SNACKBAR_ERROR } from "../../common/message";
 import { useAppDispatch } from "../../store";
 import { loadInitialMessages, sendMessageToUser } from "../../store/chat/thunk";
@@ -32,6 +32,7 @@ const ChatSummary = () => {
   const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
   const dispatch = useAppDispatch();
+  const pathName = useLocation().pathname;
 
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
   const emojiPickerRef = useRef<HTMLDivElement | null>(null);
@@ -52,6 +53,9 @@ const ChatSummary = () => {
 
       socket.on('receiveMessage', (newMessage: Message) => {
         setMessages((prevMessages) => {
+          if (pathName === `${PATH_TO_CHAT_SUMMARY}/${user.id}`) {
+            socket.emit('markMessagesAsRead', { senderId: parseInt(userId as string), receiverId: user.id });
+          }
           return prevMessages ? [...prevMessages, newMessage] : [newMessage];
         });
       });
