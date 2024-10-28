@@ -52,8 +52,6 @@ const ChatSummary = () => {
 
       socket.on('receiveMessage', (newMessage: Message) => {
         setMessages((prevMessages) => {
-          socket.emit('markMessagesAsRead', { senderId: newMessage.senderId, receiverId: user.id });
-
           return prevMessages ? [...prevMessages, newMessage] : [newMessage];
         });
       });
