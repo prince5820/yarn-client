@@ -53,18 +53,18 @@ const ChatSummary = () => {
 
       socket.on('receiveMessage', (newMessage: Message) => {
         setMessages((prevMessages) => {
-          if (pathName === `${PATH_TO_CHAT_SUMMARY}/${user.id}`) {
-            socket.emit('markMessagesAsRead', { senderId: parseInt(userId as string), receiverId: user.id });
-          }
           return prevMessages ? [...prevMessages, newMessage] : [newMessage];
         });
+        if (pathName === `${PATH_TO_CHAT_SUMMARY}/${user.id}`) {
+          socket.emit('markMessagesAsRead', { senderId: parseInt(userId as string), receiverId: user.id });
+        }
       });
 
       return () => {
         socket.off('receiveMessage');
       };
     }
-  }, [user, userId]);
+  }, [user, userId, pathName]);
 
   useEffect(() => {
     if (chatContainerRef.current) {
