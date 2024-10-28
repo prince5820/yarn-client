@@ -20,9 +20,6 @@ const Chat = () => {
 
   useEffect(() => {
 
-    getUsers();
-    getUnreadMessagesCount();
-
     if (userId) {
       socket.emit('userConnected', userId);
     }
@@ -58,6 +55,11 @@ const Chat = () => {
     };
   }, [userId]);
 
+  useEffect(() => {
+    getUsers();
+    getUnreadMessagesCount();
+  }, []);
+
   const getUsers = async () => {
     try {
       const response = await dispatch(getUsersList());
@@ -75,6 +77,7 @@ const Chat = () => {
       try {
         const response = await dispatch(getUnreadMessages(parseInt(userId)));
         if (response) {
+          console.log(response);
           setUnreadMessages(response);
         }
       } catch (err) {
