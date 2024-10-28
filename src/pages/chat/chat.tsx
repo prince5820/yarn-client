@@ -77,7 +77,6 @@ const Chat = () => {
       try {
         const response = await dispatch(getUnreadMessages(parseInt(userId)));
         if (response) {
-          console.log(response);
           setUnreadMessages(response);
         }
       } catch (err) {

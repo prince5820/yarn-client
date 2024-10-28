@@ -86,7 +86,6 @@ export const loadInitialMessages = (senderId: number, receiverId: number) => asy
 export const getUnreadMessages = (receiverId: number) => async () => {
   try {
     const response = await axiosInstance.get(`${API_PATH_GET_UNREAD_MESSAGES}/${receiverId}`);
-    console.log(response);
     return response.data;
   } catch (err) {
     if (err instanceof AxiosError) {
