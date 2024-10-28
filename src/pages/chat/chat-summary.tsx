@@ -55,7 +55,7 @@ const ChatSummary = () => {
         setMessages((prevMessages) => {
           return prevMessages ? [...prevMessages, newMessage] : [newMessage];
         });
-        if (pathName === `${PATH_TO_CHAT_SUMMARY}/${user.id}`) {
+        if (pathName === PATH_TO_CHAT_SUMMARY) {
           socket.emit('markMessagesAsRead', { senderId: parseInt(userId as string), receiverId: user.id });
         }
       });
