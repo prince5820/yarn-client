@@ -243,7 +243,7 @@ const ChatSummary = () => {
               <img src={filePath} alt="image preview" style={{ width: '200px', borderRadius: '10px' }} />
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath)} />
               </div>
             </div>
           );
@@ -257,7 +257,7 @@ const ChatSummary = () => {
               <audio controls src={filePath} style={{ width: '210px' }} />
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath)} />
               </div>
             </div>
           );
@@ -272,7 +272,7 @@ const ChatSummary = () => {
               <video controls src={filePath} style={{ width: '210px' }} />
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath)} />
               </div>
             </div>
           );
@@ -289,7 +289,7 @@ const ChatSummary = () => {
               </div>
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath)} />
               </div>
             </div>
           );
@@ -306,7 +306,7 @@ const ChatSummary = () => {
               </div>
               <div className="file-details">
                 <p>{messageDateTime}</p>
-                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath, fileName)} />
+                <DownloadIcon className="svg-icon" onClick={() => handleDownloadFile(filePath)} />
               </div>
             </div>
           );
@@ -315,10 +315,10 @@ const ChatSummary = () => {
     return null;
   };
 
-  const handleDownloadFile = (filePath: string, fileName: string) => {
+  const handleDownloadFile = (filePath: string) => {
     const element = document.createElement('a');
     element.href = filePath;
-    element.download = fileName;
+    element.target = '_blank';
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
