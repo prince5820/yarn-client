@@ -150,6 +150,7 @@ const ChatSummary = () => {
           dispatch(setMessage({ msg: err, className: SNACKBAR_ERROR }));
         } finally {
           setSending(false);
+          textFieldRef.current?.focus();
         }
       }
     }
