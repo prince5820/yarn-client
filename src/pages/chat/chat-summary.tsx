@@ -47,6 +47,12 @@ const ChatSummary = () => {
   }, [state]);
 
   useEffect(() => {
+    if (!sending) {
+      textFieldRef.current?.focus();
+    }
+  }, [sending]);
+
+  useEffect(() => {
     if (user && userId) {
       loadMessages();
 
@@ -145,7 +151,6 @@ const ChatSummary = () => {
             setTextMsg('');
             setFile(null);
             setShowEmojiPicker(false);
-            textFieldRef.current?.focus();
           }
         } catch (err) {
           dispatch(setMessage({ msg: err, className: SNACKBAR_ERROR }));
