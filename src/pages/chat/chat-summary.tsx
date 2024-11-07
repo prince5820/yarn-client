@@ -145,12 +145,12 @@ const ChatSummary = () => {
             setTextMsg('');
             setFile(null);
             setShowEmojiPicker(false);
+            textFieldRef.current?.focus();
           }
         } catch (err) {
           dispatch(setMessage({ msg: err, className: SNACKBAR_ERROR }));
         } finally {
           setSending(false);
-          textFieldRef.current?.focus();
         }
       }
     }
