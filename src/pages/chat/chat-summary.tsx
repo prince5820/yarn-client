@@ -31,6 +31,7 @@ const ChatSummary = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
+  const [sending, setSending] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const pathName = useLocation().pathname;
 
@@ -109,6 +110,7 @@ const ChatSummary = () => {
   }
 
   const handleSendMessage = async () => {
+    if (sending) return;
     const trimmedMessage = textMsg.trim();
 
     if (file && file.size / 1024 / 1024 <= 2) {
@@ -123,6 +125,7 @@ const ChatSummary = () => {
   const sendMessage = async (messageText: string | null, file: File | null) => {
     if (((messageText && messageText.length > 0) || file) && user && userId) {
       if (user && userId) {
+        setSending(true);
         const formData = new FormData();
         formData.append('senderId', userId);
         formData.append('receiverId', user.id.toString());
@@ -145,6 +148,8 @@ const ChatSummary = () => {
           }
         } catch (err) {
           dispatch(setMessage({ msg: err, className: SNACKBAR_ERROR }));
+        } finally {
+          setSending(false);
         }
       }
     }
@@ -397,9 +402,9 @@ const ChatSummary = () => {
               name="textMsg"
               value={textMsg}
               onChange={(e) => setTextMsg(e.target.value)}
-              disabled={file ? true : false}
+              disabled={file ? true : sending}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
+                if (e.key === 'Enter' && !e.shiftKey && !sending) {
                   e.preventDefault();
                   handleSendMessage();
                 }
