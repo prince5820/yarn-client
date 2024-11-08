@@ -7,7 +7,7 @@ import { User } from "./types"
 
 export const signIn = (email: string) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axiosInstance.get(`${API_PATH_SIGN_IN}/${email}`)
+    const response = await axiosInstance.post(API_PATH_SIGN_IN, { email })
     dispatch(signInSuccess(response.data));
     return response.data;
   } catch (err) {
@@ -20,7 +20,7 @@ export const signIn = (email: string) => async (dispatch: AppDispatch) => {
 
 export const forgetPassword = (email: string) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axiosInstance.get(`${API_PATH_FORGET_PASSWORD}/${email}`)
+    const response = await axiosInstance.post(API_PATH_FORGET_PASSWORD, { email })
     dispatch(forgetPasswordSuccess(response.data))
     return response.data
   } catch (err) {
