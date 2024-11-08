@@ -35,7 +35,6 @@ const Chat = () => {
     socket.on('increaseUnreadCount', ({ senderId }) => {
       setUnreadMessages((prev) => {
         const senderUnread = prev.find((message) => message.senderId === senderId);
-
         if (senderUnread) {
           return prev.map((message) =>
             message.senderId === senderId
@@ -48,10 +47,19 @@ const Chat = () => {
       });
     });
 
+    socket.on('resetUnreadCount', ({ receiverId }) => {
+      setUnreadMessages((prev) =>
+        prev.map((message) =>
+          message.senderId === receiverId ? { ...message, unreadCount: 0 } : message
+        )
+      );
+    });
+
     return () => {
       socket.off('onlineUsers');
       socket.off('userOffline');
       socket.off('increaseUnreadCount');
+      socket.off('resetUnreadCount');
     };
   }, [userId]);
 
@@ -90,10 +98,11 @@ const Chat = () => {
     return userUnread ? userUnread.unreadCount : 0;
   };
 
-  // Navigate to the chat summary of a specific user
   const goToChatSummary = (user: User) => {
-    socket.emit('markMessagesAsRead', { senderId: user.id, receiverId: parseInt(userId as string) });
-    navigate(PATH_TO_CHAT_SUMMARY, { state: { user: user } });
+    if (userId) {
+      socket.emit('markMessagesAsRead', { senderId: user.id, receiverId: parseInt(userId) });
+      navigate(PATH_TO_CHAT_SUMMARY, { state: { user: user } });
+    }
   };
 
   // Check if a specific user is online
